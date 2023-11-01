@@ -11,7 +11,7 @@ Dockerfile: This file is used to build the Docker image that runs the backup and
 requirements.txt: The Python requirements for the environment you are working in.
 ## Usage
 Set the environment variables JOB_NAME and NAMESPACE to the desired Kubernetes job name and namespace respectively.
-Run the db.py script with the name of the script to run (dump, restore, or view) as the first argument. If running the restore script, also provide the name of the backup file to restore from as the second argument.
+Run the db.py script with the name of the script to run (restore, or view) as the first argument. If running the restore script, also provide the name of the backup file to restore from as the second argument.
 Example:
 ```
 pip install -r requirements.txt
@@ -20,7 +20,6 @@ export JOB_NAME={your_desired_job_name}
 kubectl create secret generic azure-storage-credentials --from-literal=accountName={your_account_name} --from-literal=accountKey={your_account_key} -n {your_namespace}
 kubectl create secret generic db-credentials --from-literal=username={your_db_username} --from-literal=password={your_db_password} -n {your_namespace}
 kubectl apply -f backup.yaml -n {your_namespace}
-python db.py dump
 python db.py restore wiki-db-20220101-000000.sql
 python db.py view
 ```
